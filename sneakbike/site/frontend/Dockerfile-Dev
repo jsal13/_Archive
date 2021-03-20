@@ -1,0 +1,5 @@
+FROM node:latest
+
+WORKDIR /app
+# RUN npm install -g @vue/cli @vue/cli-service-global
+CMD ["npm", "run", "serve"]
