@@ -1,0 +1,25 @@
+{
+    "trader_01": [
+        [
+            "Trader|Hello, hope you are well.",
+            "Io|Thank you."
+        ],
+        [
+            "Trader|Hello."
+        ]
+    ],
+    "trader_02": [
+        [
+            "Trader|Hello, you look kind.",
+            "Io|Thank you."
+        ],
+        [
+            "Trader|Hey."
+        ]
+    ],
+    "trader_boots": [
+        [
+            "Trader|Give me two wool and I'll give you double-jump boots."
+        ]
+    ]
+}

@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Trees
+  - Temperature
+  - Ground
+  - Enemy
+  - Eternal
+  - Checkpoint
+  - CameraBound
+  - CameraTransition
+  - Trader
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Ground
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Auras
+    uniqueID: 899864983
+    locked: 0
+  - name: Interactables
+    uniqueID: 1093485171
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Characters
+    uniqueID: 2351485955
+    locked: 0
+  - name: Bonfires
+    uniqueID: 513539001
+    locked: 0
+  - name: Friends
+    uniqueID: 943935003
+    locked: 0
+  - name: Dialog
+    uniqueID: 513429865
+    locked: 0
+  - name: HUD
+    uniqueID: 793174827
+    locked: 0

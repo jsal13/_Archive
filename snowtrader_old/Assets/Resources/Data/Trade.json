@@ -1,0 +1,32 @@
+[
+    {
+        "tradeType": "trade_type_01",
+        "items": [
+            {
+                "name": "Wood",
+                "buy": 2,
+                "sell": 1
+            },
+            {
+                "name": "Wool",
+                "buy": 5,
+                "sell": 1
+            }
+        ]
+    },
+    {
+        "tradeType": "trade_type_02",
+        "items": [
+            {
+                "name": "Wood",
+                "buy": 3,
+                "sell": 1
+            },
+            {
+                "name": "Wool",
+                "buy": 10,
+                "sell": 7
+            }
+        ]
+    }
+]
