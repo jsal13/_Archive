@@ -1,0 +1,78 @@
+<!--
+title: Runner Troubleshooting
+description: Troubleshooting for various issues that runners might encounter.
+published: true
+date: 2021-04-15T03:58:21.664Z
+tags: runners, emulator, obs, faq, troubleshooting
+editor: ckeditor
+dateCreated: 2021-03-22T08:17:12.444Z
+-->
+
+<h1>What should I expect before/on race day?</h1>
+<p>You're in the race, great! Now what?</p>
+<h2>Before Race-day...</h2>
+<ol>
+  <li>If you haven't done <a href="https://sneak.bike/runner_setup.html">Runner Setup</a> yet, go and do that.<ul>
+      <li>If you have problems, feel free to ask us about it in the discord beforehand.</li>
+    </ul>
+  </li>
+</ol>
+<h2>On Race-day, Before the Race...</h2>
+<ol>
+  <li>You'll be expected to come into the racer prep room around an hour early (2pm EST) on Saturday to get everything set up. We'll ping the racers letting them know we're starting setup.</li>
+  <li>Once we begin setup, a few things will happen:<ul>
+      <li>We will link you to a sample game to make sure your emulator/controller is working correctly.</li>
+      <li>We will give you the address for the Sneakbike server; we'll instruct you on how to put this into your OBS and begin streaming to the Sneakbike server.</li>
+      <li>Once we've captured your stream from our server, we will give you the OK and you can relax for a bit.</li>
+    </ul>
+  </li>
+  <li>After everyone is set up, around ten minutes before the race starts (3pm EST) we will send out the game(s) and the README file in a ZIP bundle.</li>
+  <li>We will tell you to open up the first game but <i>DO NOT PLAY IT YET</i> and we will also go through the README with you to make sure there are no questions.</li>
+</ol>
+<h2>During the Race...</h2>
+<ol>
+  <li>You will be server-muted in a discord voice channel so that the commentators or ops can give you race instructions.</li>
+  <li>We will begin the Sneakbike stream which has a five minute startup plus two-or-so minutes of commentator intro.</li>
+  <li>After this time, we will have one of the commentators come into the voice chat (and into the text chat) and give you the <strong>3, 2, 1, GO!</strong> countdown to begin the race.</li>
+  <li>At this point, you'll start playing.</li>
+</ol>
+<h2>After the Race...</h2>
+<ol>
+  <li>We will usually have an after-race brief interview with the runners. We will tell you beforehand, and we will pull you into the commentator room and unmute you. We'll probably ask you how the game was, etc.</li>
+  <li>After the interviews are over, we will raid someone. We will have a quick debrief with the runners/commentators/ops after which is <i>optional, but very helpful for us</i>. This is usually around five minutes of us asking what we can do better, what was good and what was bad, etc.</li>
+</ol>
+<p>And that's it!</p>
+<h1>Emulator Paused/Stuck and I can't Unpause.</h1>
+<p>Sometimes, especially after typing while using BizHawk, the emulator seems to pause and you can't get out of it with the controller. This is because one of the hotkeys for Pause is probably set to something you've typed (see: <strong>Config &gt; Hotkeys &gt; "Pause"</strong>).</p>
+<p>The way to fix this is to go into <strong>Emulation</strong> and see if "Pause" is selected, and unselecting it if it is. See the GIF below:</p>
+<figure class="image"><img src="/runner_setup/pauseunpause.png">
+  <figcaption>To unpause a “stuck” emulator, go to Emulation → Pause and uncheck it.</figcaption>
+</figure>
+<h1>How do I resize the emulator?</h1>
+<p><strong>Since going into Full-Screen will mess with your capture of the emulator,</strong> you'll need to instead use a scaling factor. Go to <strong>View &gt; Window Size</strong> and select the desired scaling. It doesn't matter what you use, but runners will generally use 3x or 4x to hit that sweet-spot between too pixelated and too tiny.</p>
+<figure class="image"><img src="/runner_setup/resizing.gif">
+  <figcaption>To increase window size, go to View → Window Size → 4x or 5x. &nbsp;DO NOT USE FULL SCREEN.</figcaption>
+</figure>
+<h1>How to Save/Load State.</h1>
+<p>When playing a game, you can Save State to make the emulator remember where you were at that specific time. When you Load State it is like "rewinding" to that time with everything exactly as it was. This is useful in many situations, including trying to practice difficult parts of games.</p>
+<p>To save state, go to <strong>File &gt; Save State</strong> and pick out any of the slots. To load state, go to <strong>File &gt; Load State</strong> and pick out the slot you saved state in.</p>
+<figure class="image"><img src="/runner_setup/savestate_1.png">
+  <figcaption>To make a savestate, go to File → Save State → Pick a number.</figcaption>
+</figure>
+<figure class="image"><img src="/runner_setup/savestate_2.png">
+  <figcaption>To load a savestate, go to File → Load State → Select the number you saved to before.</figcaption>
+</figure>
+<p>&nbsp;</p>
+<h1>How to Optimize My Internet for Streaming.</h1>
+<p>There are a number of good articles for this, <a href="https://www.techspot.com/article/2157-optimize-gaming-internet-connection/">this</a> is a good starting point. &nbsp;Ultimately, you need a strong, consistent signal to broadcast. &nbsp;How you get this will depend on your specific setup.</p>
+<p>&nbsp;</p>
+<h1>What Controller should I get?</h1>
+<p>While it's <strong>entirely possible to play keyboard-only</strong>, some runners prefer the feel of a controller. &nbsp;We've compiled a list below of controllers we know and can recommend. &nbsp;Note that because manufacture and distribution of these controllers may change over time, it's good to read the reviews to make sure that the latest controllers being sold are still of good quality.</p>
+<ul>
+  <li><a href="https://www.amazon.com/Wireless-Controller-Classic-nintendo_super_NES-super-nintendo/dp/B074HBQ78V">8Bitdo SN30 2.4G Wireless Controller for SNES Classic Edition</a></li>
+  <li><a href="https://www.amazon.com/Logitech-940-000110-Gamepad-F310/dp/B003VAHYQY">Logitech Gamepad F310</a></li>
+  <li><a href="https://www.amazon.com/Classic-Controller-kiwitatá-Joystick-Raspberry/dp/B01JYGYAX8">Kiwitata USB Super NES Wired Game Controller</a></li>
+  <li><a href="https://www.amazon.com/Controller-iNNEXT-Classic-Raspberry-Multicolored/dp/B01N48L71I">iNNEXT Retro USB Super Classic Controller</a></li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

@@ -1,0 +1,59 @@
+<!--
+title: Runner Setup
+description: 
+published: true
+date: 2021-04-08T02:02:42.297Z
+tags: runners, setup, emulator, obs
+editor: ckeditor
+dateCreated: 2021-03-22T08:12:08.679Z
+-->
+
+<h1>Before you begin...</h1>
+<p>We assume you're running Windows 10. If not, check in with us and we'll get you compatible software. If you'd rather see the <a href="https://www.youtube.com/watch?v=qtB0n4RuBGo">video tutorial</a>, that's available here.</p>
+<h1>Getting the EmuHawk (BizHawk) Emulator</h1>
+<p>In order to emulate retro games, we use the EmuHawk Emulator in the BizHawk suite of tools. If you find there are issues with this (eg, controller acting strangely, etc.) please let us know in the discord and we'll help you debug.</p>
+<ol>
+  <li>Download the <a href="https://github.com/TASVideos/BizHawk-Prereqs/releases">bizhawk_prereqs</a> ZIP file, which is listed under Assets. After downloading, unzip and install.</li>
+  <li>Download <a href="https://github.com/TASVideos/BizHawk/releases">Bizhawk</a>, which is listed under Assets and looks something like <strong>Bizhawk-Numbers.zip</strong> (similar to the image below). <strong>Unzip the file once it has downloaded.</strong></li>
+</ol>
+<figure class="image"><img src="/runner_setup/bizhawk_download.png">
+  <figcaption>Bizhawk Download</figcaption>
+</figure>
+<ol>
+  <li>Warning: There is currently an issue where Windows 10 thinks that BizHawk is a virus. This is a false positive. Try downloading <a href="https://github.com/TASVideos/BizHawk/releases/tag/2.4.2">Version 2.4.2</a> if your Windows refuses to let you open the latest.</li>
+  <li>In the unzipped BizHawk folder, you'll find a program called <strong>EmuHawk.exe</strong>. This is the emulator and you can double-click to run it.</li>
+</ol>
+<h1>Configuring the EmuHawk Emulator</h1>
+<p><strong>Note</strong>: If you'd rather see the video of the config, check <a href="https://youtu.be/J_WM3zYQVH0">our video tutorial</a>.</p>
+<p>We'll configure three things in BizHawk.</p>
+<ul>
+  <li>Hotkeys</li>
+  <li>Display</li>
+  <li>Sound</li>
+</ul>
+<p>Each of these items can be found in the Config menu at the top of the EmuHawk program. The screenshots below show you what each screen should look like.</p>
+<p>For the Sound menu, if you uncheck the box we've circled in red, this will mute the emulator. <i>Note that your sound device might be different than in the image.</i></p>
+<figure class="image"><img src="/runner_setup/emuhawk_hotkeys_config.png">
+  <figcaption>EmuHawk Hotkey Configuration</figcaption>
+</figure>
+<figure class="image"><img src="/runner_setup/emuhawk_snes_display_config.png">
+  <figcaption>EmuHawk Display Configuration</figcaption>
+</figure>
+<figure class="image"><img src="/runner_setup/emuhawk_sound_config.png">
+  <figcaption>EmuHawk Sound Configuration. &nbsp;Unchecking the part in the red circle will mute the game. &nbsp;Your speakers will probably be named something different.</figcaption>
+</figure>
+<h1>Setting Up OBS</h1>
+<p>OBS is what we use to stream the game to the Sneakbike server (and what many people use to stream to Twitch).</p>
+<ol>
+  <li>Download and install <a href="https://obsproject.com/">OBS</a>.</li>
+  <li>Download the <a href="https://drive.google.com/file/d/16uHzUpr4XAinq1Do_KP3-I_ptS1bJCrB/view?usp=sharing">Sneakbike Profile for OBS</a>. Unzip this once it is downloaded.</li>
+</ol>
+<p>You'll now need to import the profile to your OBS. &nbsp;To do this, follow the directions in the next section.</p>
+<h1>OBS Profile Import</h1>
+<ol>
+  <li>In OBS, Go into Profile &gt; Import, navigate to the unzipped Sneakbike folder from the previous steps, click the Sneakbike_Profile folder and hit "open".</li>
+  <li>Still in OBS, go into the Profile menu again. You should see (at least) two profiles at the bottom, including Sneakbike.</li>
+  <li>Clicking on Sneakbike will bring you to the Sneakbike profile we require for racers.</li>
+</ol>
+<h1>Racing</h1>
+<p>Before the race, usually the day-of, we'll give you instructions on how to stream to the correct location and how to set up a scene to have your game-play broadcast correctly. Don't worry about it for now, but if you're interested ask us in the discord!</p>
