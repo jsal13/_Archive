@@ -1,0 +1,15 @@
+FROM ubuntu:20.04
+
+# This image is used for testing our RTMP setup.
+
+COPY rtmp.conf .
+
+RUN apt-get update \
+  && apt-get install -y software-properties-common \
+  && add-apt-repository -y ppa:nginx/stable
+RUN apt-get install -y libnginx-mod-rtmp
+
+# Customize the rtmp.conf included to test things.
+RUN cat ./rtmp.conf | tee -a /etc/nginx/nginx.conf
+
+#  systemctl restart nginx
