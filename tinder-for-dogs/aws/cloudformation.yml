@@ -1,0 +1,223 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Parameters:
+  ApiGatewayStageName:
+    Type: "String"
+    AllowedPattern: "^[a-z0-9]+$"
+    Default: "call"
+
+  LambdaFunctionName:
+    Type: "String"
+    AllowedPattern: "^[a-zA-Z0-9]+[a-zA-Z0-9-]+[a-zA-Z0-9]+$"
+    Default: "my-function"
+
+Resources:
+  # s3 + Cloudfront
+  S3Bucket:
+    DeletionPolicy: "Delete"
+    Metadata:
+      Comment: "Bucket to store Dog Images"
+    Properties:
+      AccessControl: "Private"
+      BucketName: !Sub "cf-simple-s3-origin-${AWS::StackName}-${AWS::AccountId}"
+    Type: "AWS::S3::Bucket"
+
+  S3BucketPolicy:
+    Metadata:
+      Comment: "Bucket policy to allow cloudfront to access the data"
+    Properties:
+      Bucket: !Ref S3Bucket
+      PolicyDocument:
+        Statement:
+          - Action:
+              - "s3:GetObject"
+            Effect: "Allow"
+            Principal:
+              CanonicalUser: !GetAtt CfOriginAccessIdentity.S3CanonicalUserId
+            Resource:
+              - !Sub "arn:aws:s3:::${S3Bucket}/*"
+    Type: "AWS::S3::BucketPolicy"
+
+  CfDistribution:
+    Metadata:
+      Comment: "A simple CloudFront distribution with an S3 origin"
+    Properties:
+      DistributionConfig:
+        Comment: "A simple distribution with an S3 origin"
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - "HEAD"
+            - "GET"
+          CachedMethods:
+            - "HEAD"
+            - "GET"
+          Compress: false
+          DefaultTTL: 86400
+          ForwardedValues:
+            Cookies:
+              Forward: "none"
+            Headers:
+              - "Origin"
+            QueryString: false
+          MaxTTL: 31536000
+          MinTTL: 86400
+          TargetOriginId: !Sub "s3-origin-${S3Bucket}"
+          ViewerProtocolPolicy: "redirect-to-https"
+        DefaultRootObject: "index.html"
+        Enabled: true
+        HttpVersion: "http1.1"
+        IPV6Enabled: false
+        Origins:
+          - DomainName: !GetAtt S3Bucket.DomainName
+            Id: !Sub "s3-origin-${S3Bucket}"
+            OriginPath: ""
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CfOriginAccessIdentity}"
+        PriceClass: "PriceClass_All"
+    Type: "AWS::CloudFront::Distribution"
+
+  CfOriginAccessIdentity:
+    Metadata:
+      Comment: "Access S3 bucket content only through CloudFront"
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: "Access S3 bucket content only through CloudFront"
+    Type: "AWS::CloudFront::CloudFrontOriginAccessIdentity"
+
+  ApiGateway:
+    Type: "AWS::ApiGateway::RestApi"
+    Properties:
+      Name: "core-api"
+      Description: "Core API"
+
+  ApiGatewayRootMethod:
+    Type: "AWS::ApiGateway::Method"
+    Properties:
+      AuthorizationType: "NONE"
+      HttpMethod: "GET"
+      Integration:
+        IntegrationHttpMethod: "POST"
+        Type: "AWS_PROXY"
+        Uri: !Sub
+          - "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaArn}/invocations"
+          - LambdaArn: !GetAtt "LambdaFunction.Arn"
+      ResourceId: !GetAtt "ApiGateway.RootResourceId"
+      RestApiId: !Ref "ApiGateway"
+
+  ApiGatewayDeployment:
+    Type: "AWS::ApiGateway::Deployment"
+    DependsOn:
+      - "ApiGatewayRootMethod"
+    Properties:
+      RestApiId: !Ref "ApiGateway"
+      StageName: !Ref "ApiGatewayStageName"
+
+  LambdaFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Code:
+        ZipFile: !Sub
+          - |
+            def handler(event,context):
+                return {
+                  'body': '${S3KeyTest}',
+                  'headers': {
+                    'Content-Type': 'text/plain'
+                  },
+                  'statusCode': 200
+                }
+          - { S3KeyTest: !GetAtt CfDistribution.DomainName }
+
+      Description: "My function"
+      FunctionName: !Ref "LambdaFunctionName"
+      Handler: "index.handler"
+      MemorySize: 128
+      Role: !GetAtt "LambdaIAMRole.Arn"
+      Runtime: "python3.7"
+      Timeout: 10
+
+  LambdaApiGatewayInvoke:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !GetAtt "LambdaFunction.Arn"
+      Principal: "apigateway.amazonaws.com"
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*/GET/"
+
+  LambdaIAMRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Action:
+              - "sts:AssumeRole"
+            Effect: "Allow"
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+      Policies:
+        - PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Action:
+                  - "logs:CreateLogGroup"
+                  - "logs:CreateLogStream"
+                  - "logs:PutLogEvents"
+                Effect: "Allow"
+                Resource:
+                  - !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/${LambdaFunctionName}:*"
+          PolicyName: "lambda"
+
+  LambdaLogGroup:
+    Type: "AWS::Logs::LogGroup"
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${LambdaFunctionName}"
+      RetentionInDays: 90
+
+  # DynamoDB
+  DynamoDBTableDog:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "_id"
+          AttributeType: "N"
+      KeySchema:
+        - AttributeName: "_id"
+          KeyType: "HASH"
+
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: "dog_table_test_melatonin_2357111317"
+
+  DynamoDBTableUser:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "_id"
+          AttributeType: "N"
+      KeySchema:
+        - AttributeName: "_id"
+          KeyType: "HASH"
+
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: "user_table_test_melatonin_2357111317"
+
+  # ---
+
+Outputs:
+  S3BucketName:
+    Description: "Bucket name"
+    Value: !Ref S3Bucket
+  CfDistributionId:
+    Description: "Id for our cloudfront distribution"
+    Value: !Ref CfDistribution
+  CfDistributionDomainName:
+    Description: "Domain name for our cloudfront distribution"
+    Value: !GetAtt CfDistribution.DomainName
+  ApiGatewayInvokeURL:
+    Value: !Sub "https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/${ApiGatewayStageName}"
+  LambdaArn:
+    Value: !GetAtt "LambdaFunction.Arn"

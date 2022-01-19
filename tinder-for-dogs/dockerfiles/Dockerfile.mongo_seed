@@ -1,0 +1,5 @@
+FROM mongo:4.2.2
+
+COPY ./db/dog_metadata.json /dog_metadata.json
+COPY ./db/test_user_metadata.json /user_metadata.json
+COPY ./dockerfiles/mongodb_seed_script.sh /mongodb_seed_script.sh

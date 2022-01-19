@@ -1,0 +1,8 @@
+FROM python:3.7.6-slim-buster
+
+COPY ./api /api
+WORKDIR /api
+
+RUN pip install -r requirements_dev.txt -q
+
+CMD ["python", "api.py"]

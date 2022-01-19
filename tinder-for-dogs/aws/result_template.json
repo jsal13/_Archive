@@ -1,0 +1,13 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Transform": "AWS::Serverless-2016-10-31",
+  "S3Bucket": {
+    "DeletionPolicy": "Delete",
+    "Metadata": { "Comment": "Bucket to store dog pics." },
+    "Properties": {
+      "AccessControl": "Private",
+      "BucketName": "Fn::Sub(cf-simple-s3-origin-${AWS::StackName}-${AWS::AccountId})"
+    },
+    "Type": "AWS::S3::Bucket"
+  }
+}

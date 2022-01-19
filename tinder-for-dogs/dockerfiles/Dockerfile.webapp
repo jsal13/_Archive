@@ -1,0 +1,8 @@
+FROM node:13.5-stretch-slim
+
+COPY ./webapp /app
+WORKDIR /app
+RUN npm i --silent
+
+# CMD ["npm", "run", "start"]
+CMD ["npx", "vue-cli-service", "serve", "--host", "0.0.0.0"]

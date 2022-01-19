@@ -1,0 +1,10 @@
+pip==19.2.3
+wheel==0.33.6
+Sphinx==1.8.5
+twine==1.14.0
+flask==1.0.2
+flask-restplus==0.13.0
+flask-cors==3.0.8
+pymongo==3.10.0
+pytest==4.6.5
+pytest-runner==5.1
