@@ -1,0 +1,19 @@
+Scale: Major (Ionian)
+Scale: Dorian
+Scale: Phrygian
+Scale: Lydian
+Scale: Mixolydian
+Scale: Aeolian (natural minor)
+Scale: Locrian
+Scale: Minor Pentatonic
+Scale: Major Pentatonic
+Scale: Blues Scale
+CAGED: C-shape
+CAGED: A-shape
+CAGED: G-shape
+CAGED: E-shape
+CAGED: D-shape
+Song: 
+Song: 
+Song: 
+Song: 

@@ -1,0 +1,22 @@
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Makes the cool looking HR.. */
+hr {
+	text-align: center;
+	outline: 0;
+  border: 0;
+  margin-bottom: 2.5rem;
+}
+
+hr::after {
+	content: '\25CF\a0\a0\a0\a0\a0\25CF\a0\a0\a0\a0\a0\25CF\a0\a0\a0\a0\a0\25CF\a0\a0\a0\a0\a0\25CF';
+
+	color: #2196f3;
+	font-size: 0.5rem;
+}
