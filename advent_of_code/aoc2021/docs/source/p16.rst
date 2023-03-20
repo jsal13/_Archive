@@ -1,0 +1,7 @@
+p16 module
+==========
+
+.. automodule:: p16
+   :members:
+   :undoc-members:
+   :show-inheritance:

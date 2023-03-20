@@ -1,0 +1,9 @@
+[tool.mypy]
+# Need to wait until 0.930 for a fix.
+# https://github.com/strawberry-graphql/strawberry/pull/1503
+#plugins = [
+#  "pydantic.mypy"
+#]
+
+# for strict mypy:
+disallow_untyped_defs = true

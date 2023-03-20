@@ -1,0 +1,7 @@
+p04 module
+==========
+
+.. automodule:: p04
+   :members:
+   :undoc-members:
+   :show-inheritance:
