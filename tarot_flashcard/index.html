@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarot</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body class="d-flex text-center text-white bg-dark">
+    <div class="d-flex mx-auto flex-column">
+        <main class="px-3 mt-4">
+            <h1>Tarot</h1>
+            <div class="row mt-4 mb-4">
+                <div class="col"><img class="card" src="assets/images/card_back.jpg" alt="card" width=300></div>
+                <!-- <div class="col"><img class="card" src="assets/images/card_back.jpg" alt="card" width=200></div>
+                <div class="col"><img class="card" src="assets/images/card_back.jpg" alt="card" width=200></div> -->
+            </div>
+
+            <button type="button" id="draw">Draw</button>
+            <br />
+            <p id="reveal"></p>
+            <button type="button" id="reveal">Reveal</button>
+            </p>
+        </main>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+
+    <script>
+
+        const interpretation = {
+            "01": ["The Fool", ["Beginnings", "Spontaneity", "Chance-Taking", "Innocence"]],
+            "02": ["Magician", [" "]],
+            "03": ["High Priestess", [" "]],
+            "04": ["The Empress", ["Fertility", "Pleasure", "Creativity", "Abundance"]],
+            "05": ["The Emperor", ["Leadership", "Structure", "Society", "Benevolence"]],
+            "06": ["The Hierophath", ["Tradition", "Convention", "Learning", "Conformity"]],
+            "07": ["The Lovers", [" "]],
+            "08": ["The Chariot", [" "]],
+            "09": ["Strength", ["Courage", "Self-Compassion", "Acceptance", "Security"]],
+            "10": ["The Hermit", [" "]],
+            "11": ["Wheel of Fortune", [" "]],
+            "12": ["Justice", ["Fairness", "Truth", "Equity", "Equilibrium"]],
+            "13": ["The Hanged Man", [" "]],
+            "14": ["Death", ["Transformation", "Change", "Endings", "Release"]],
+            "15": ["Temperance", ["Harmony", "Balance", "Flow", "Alchemical Process"]],
+            "16": ["The Devil", [" "]],
+            "17": ["The Tower", ["Revelation", "Upheval", "Sudden Change", "Instability"]],
+            "18": ["The Star", ["Clensing", "Renewal", "Hope", "Healing"]],
+            "19": ["The Moon", [" "]],
+            "20": ["The Sun", ["Clarity", "Innocence", "Joy", "Authenticity"]],
+            "21": ["Judgment", ["Awaking", "Epiphony", "Spiritual Rebirth", "Realization"]],
+            "22": ["The World", [" "]]
+        };
+
+        function FlipCards() {
+            console.log("Flipping...")
+            window.randomCards = GetRandomCards(1);
+            $("img.card").each(function (index) {
+                console.log(`This is card ${index}`)
+                $(this).attr('src', `assets/images/${randomCards[index]}.jpg`);
+            });
+        };
+
+        function Reveal() {
+            console.log("Revealing...")
+            var interp = interpretation[window.randomCards[0]];
+            var interpStr = `<h2>${interp[0]}</h2><ul style="list-style: none;"><li>${interp[1][0]}</li><li>${interp[1][1]}</li><li>${interp[1][2]}</li><li>${interp[1][3]}</li></ul>`
+
+            $("p#reveal").html(`${interpStr}`);
+        };
+
+
+        function Unreveal() {
+            $("p#reveal").html("");
+        };
+
+
+        $(document).ready(function () {
+            $("button#draw").click(function () {
+                FlipCards();
+                Unreveal();
+            });
+            $("button#reveal").click(function () {
+                Reveal();
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
