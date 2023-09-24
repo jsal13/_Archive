@@ -1,0 +1,29 @@
+set shell := ["zsh", "-cu"]
+
+default:
+    just --list
+
+docs:
+    pushd docs && make html && popd
+
+format:
+    black .
+
+test:
+    pytest --cov=lightningbug -m "not integration" tests/
+
+integration-test:
+    pytest -m "integration" tests/
+
+nbextensions:
+    jupyter contrib nbextension install --user
+    # Codefolding
+    jupyter nbextension enable codefolding/main
+    
+    # Autopep8
+    jupyter nbextension install https://github.com/kenkoooo/jupyter-autopep8/archive/master.zip --user
+    jupyter nbextension enable jupyter-autopep8-master/jupyter-autopep8
+
+    # Black
+    jupyter nbextension install https://github.com/drillan/jupyter-black/archive/master.zip --user
+    jupyter nbextension enable jupyter-black-master/jupyter-black

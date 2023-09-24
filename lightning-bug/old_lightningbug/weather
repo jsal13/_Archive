@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# TODO: We probably don't need to find the grid values _every time_.
+
+# !! PUT YOUR DESIRED LAT/LNG VALUES HERE:
+LAT=41.9328
+LNG=-87.6427
+
+# Assigns CWA, the gridX val and the gridY val.
+# These are location data for the weather station.
+read LB_CWA LB_GRIDX LB_GRIDY < <(echo $(curl "https://api.weather.gov/points/$LAT,$LNG" | jq -r ".properties | (.cwa, .gridX, .gridY)"))
+
+# Take the first 24 hours, filter the data, and pretty-print.
+curl -s "https://api.weather.gov/gridpoints/$LB_CWA/$LB_GRIDX,$LB_GRIDY/forecast/hourly?units=us" \
+| jq '.properties.periods[:24]' \
+| jq ".[] 
+    | {
+        startTime: .startTime, 
+        temperature: .temperature, 
+        temperatureUnit: .temperatureUnit,
+        probabilityOfPrecipitation: .probabilityOfPrecipitation.value,
+        relativeHumidity: .relativeHumidity.value, 
+        windSpeed: .windSpeed, 
+        windDirection: .windDirection,
+        shortForecast: .shortForecast
+    }
+" \
+| jq -s "." \
+| python ./format.py
+
+
